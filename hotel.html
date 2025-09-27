@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هتل لوکس - صفحه اصلی</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #1a4b8c;
+            --secondary-color: #c19a6b;
+            /* --secondary-color: #dd7b03; */
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --accent-color: #d4af37;
+        }
+        
+        body {
+            font-family: 'Vazirmatn', 'Tanha', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+        
+        /* نوار بالای صفحه */
+        .top-bar {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 0;
+        }
+        
+        .language-selector {
+            display: inline-block;
+        }
+        
+        .language-selector .btn {
+            color: white;
+            border-color: white;
+        }
+        
+        .user-menu {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .user-menu-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+        
+        .user-menu-content a {
+            color: var(--dark-color);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .user-menu-content a:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .user-menu:hover .user-menu-content {
+            display: block;
+        }
+        
+        /* منوی اصلی */
+        .main-nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-nav .nav-link {
+            color: var(--dark-color);
+            font-weight: 500;
+            padding: 15px 20px;
+            transition: all 0.3s;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: var(--secondary-color);
+        }
+        
+        /* اسلایدشو */
+        .carousel-item {
+            height: 500px;
+        }
+        
+        .carousel-content {
+            position: absolute;
+            bottom: 100px;
+            right: 50px;
+            left: 50px;
+            z-index: 10;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+        }
+        
+        /* بخش منوها و اتاق‌ها */
+        .menu{
+            background-color: var(--secondary-color);
+        }
+        .room{
+            background-color: rgb(5, 228, 154);
+        }
+
+        .section-title {
+            position: relative;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            text-align: center;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .card {
+            background-color: rgb(5, 228, 154);
+            border: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .price {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .btn-booking {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+        }
+        
+        .btn-booking:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* گالری */
+        .gallery-item {
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        
+        .gallery-item img {
+            transition: transform 0.5s;
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* درباره ما */
+        .about-section {
+            background-color: var(--light-color);
+            padding: 60px 0;
+        }
+        
+        /* فرم تماس */
+        .contact-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-send {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 30px;
+        }
+        
+        /* فوتر */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-links h5 {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links h5:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .footer-links ul li a:hover {
+            color: white;
+            padding-right: 5px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            color: white;
+            margin-right: 5px;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <!-- نوار بالای صفحه -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3616/3616932.png" alt="لوگو هتل" width="40" height="40" class="me-2">
+                    <span class="fw-bold">هتل لوکس</span>
+                </div>
+                <div>
+                    <!-- <div class="language-selector me-3">
+                        <select class="form-select form-select-sm">
+                            <option value="fa">فارسی</option>
+                            <option value="pr">پشتو</option>
+                            <option value="dr">دری</option>
+                            <option value="en">English</option>
+                        </select>
+                    </div> -->
+                    <div class="user-menu">
+                        <button class="btn btn-sm"><i class="fas fa-user me-1"></i> حساب کاربری</button>
+                        <div class="user-menu-content">
+                            <a href="#"><i class="fas fa-sign-in-alt me-2"></i> ورود</a>
+                            <a href="#"><i class="fas fa-user-plus me-2"></i> ثبت نام</a>
+                            <a href="#"><i class="fas fa-sign-out-alt me-2"></i> خروج</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- منوی اصلی -->
+    <nav class="navbar navbar-expand-lg navbar-light main-nav">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainMenu">
+                <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">صفحه اصلی</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">منوها</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">اتاق‌ها</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">گالری</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">درباره ما</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">تماس با ما</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- اسلایدشو -->
+    <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="نمونه از اتاق" style="object-fit: cover; height: 100%;">
+                <div class="carousel-content">
+                    <h2>اتاق‌های لوکس و مجهز</h2>
+                    <p>اتاق‌های ما با بهترین امکانات و طراحی مدرن برای اقامتی به یاد ماندنی</p>
+                    <a href="#" class="btn btn-booking me-2">اطلاعات بیشتر</a>
+                    <a href="#" class="btn btn-booking">رزرو اتاق</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="نمونه از منو" style="object-fit: cover; height: 100%;">
+                <div class="carousel-content">
+                    <h2>منوهای متنوع و لذیذ</h2>
+                    <p>غذاهای بین‌المللی و محلی با بهترین کیفیت و طعم</p>
+                    <a href="#" class="btn btn-booking me-2">اطلاعات بیشتر</a>
+                    <a href="#" class="btn btn-booking">سفارش آنلاین</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="نمونه از هتل" style="object-fit: cover; height: 100%;">
+                <div class="carousel-content">
+                    <h2>هتلی با محیطی آرام و دلنشین</h2>
+                    <p>محیطی مناسب برای استراحت و تفریح با امکانات کامل</p>
+                    <a href="#" class="btn btn-booking me-2">اطلاعات بیشتر</a>
+                    <a href="#" class="btn btn-booking">رزرو آنلاین</a>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">قبلی</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">بعدی</span>
+        </button>
+    </div>
+
+    <!-- بخش منوها -->
+    <section class="py-5 menu">
+        <div class="container">
+            <h2 class="section-title">منوهای ویژه</h2>
+            <div class="row" id="menuCarousel">
+                <!-- آیتم‌های منو با JavaScript اضافه خواهند شد -->
+            </div>
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-booking">مشاهده همه منوها</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش اتاق‌ها -->
+    <section class="py-5 bg-light room">
+        <div class="container">
+            <h2 class="section-title">اتاق‌های ما</h2>
+            <div class="row" id="roomCarousel">
+                <!-- آیتم‌های اتاق با JavaScript اضافه خواهند شد -->
+            </div>
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-booking">مشاهده همه اتاق‌ها</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش گالری -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">گالری تصاویر</h2>
+            <div class="row">
+                <div class="col-md-3 col-sm-6 gallery-item">
+                    <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="گالری هتل" class="img-fluid">
+                </div>
+                <div class="col-md-3 col-sm-6 gallery-item">
+                    <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="گالری هتل" class="img-fluid">
+                </div>
+                <div class="col-md-3 col-sm-6 gallery-item">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="گالری هotel" class="img-fluid">
+                </div>
+                <div class="col-md-3 col-sm-6 gallery-item">
+                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="گالری هتل" class="img-fluid">
+                </div>
+                <div class="col-md-3 col-sm-6 gallery-item">
+                    <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="گالری هتل" class="img-fluid">
+                </div>
+                <div class="col-md-3 col-sm-6 gallery-item">
+                    <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="گالری هتل" class="img-fluid">
+                </div>
+                <div class="col-md-3 col-sm-6 gallery-item">
+                    <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="گالری هتل" class="img-fluid">
+                </div>
+                <div class="col-md-3 col-sm-6 gallery-item">
+                    <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="گالری هتل" class="img-fluid">
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-booking">مشاهده همه تصاویر</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش درباره ما -->
+    <section class="about-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="section-title text-start">درباره هتل لوکس</h2>
+                    <p>هتل لوکس با سال‌ها تجربه در زمینه میزبانی از مهمانان داخلی و خارجی، یکی از مجهزترین و بهترین هتل‌های منطقه است. ما با بهره‌گیری از نیروهای متخصص و امکانات مدرن، همواره تلاش کرده‌ایم تا اقامتی به یاد ماندنی را برای مهمانان عزیز فراهم کنیم.</p>
+                    <p>هتل ما دارای اتاق‌های مجهز، رستوران‌های بین‌المللی، سالن‌های کنفرانس و تفریحی و سایر امکانات رفاهی می‌باشد که می‌تواند پاسخگوی نیازهای متنوع مهمانان باشد.</p>
+                    <a href="#" class="btn btn-booking">اطلاعات بیشتر</a>
+                </div>
+                <div class="col-md-6">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="درباره هتل" class="img-fluid rounded">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش تماس با ما -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">تماس با ما</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="contact-form">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label">نام کامل</label>
+                                        <input type="text" class="form-control" id="name" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">ایمیل</label>
+                                        <input type="email" class="form-control" id="email" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">موضوع</label>
+                                <input type="text" class="form-control" id="subject" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">پیام</label>
+                                <textarea class="form-control" id="message" rows="5" required></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-send">ارسال پیام</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 footer-links">
+                    <h5>دسترسی سریع</h5>
+                    <ul>
+                        <li><a href="#">صفحه اصلی</a></li>
+                        <li><a href="#">اتاق‌ها</a></li>
+                        <li><a href="#">منوها</a></li>
+                        <li><a href="#">گالری</a></li>
+                        <li><a href="#">درباره ما</a></li>
+                        <li><a href="#">تماس با ما</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 footer-links">
+                    <h5>اتاق‌ها</h5>
+                    <ul>
+                        <li><a href="#">اتاق استاندارد</a></li>
+                        <li><a href="#">اتاق رویال</a></li>
+                        <li><a href="#">سوئیت لوکس</a></li>
+                        <li><a href="#">سوئیت خانواده</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 footer-links">
+                    <h5>خدمات</h5>
+                    <ul>
+                        <li><a href="#">رستوران</a></li>
+                        <li><a href="#">استخر</a></li>
+                        <li><a href="#">سالن ورزشی</a></li>
+                        <li><a href="#">سالن کنفرانس</a></li>
+                        <li><a href="#">ترانسفر فرودگاهی</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 footer-links">
+                    <h5>تماس با ما</h5>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt me-2"></i> تهران، خیابان نمونه، پلاک ۱۲۳</li>
+                        <li><i class="fas fa-phone me-2"></i> ۰۲۱-۱۲۳۴۵۶۷۸</li>
+                        <li><i class="fas fa-envelope me-2"></i> info@luxuryhotel.com</li>
+                    </ul>
+                    <div class="social-links mt-3">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright text-center">
+                <p>کلیه حقوق مادی و معنوی این سایت متعلق به هتل لوکس می‌باشد. © ۱۴۰۲</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap & jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- TypeScript code would be compiled to JavaScript -->
+    <script>
+        // داده‌های نمونه برای منوها
+        const menuItems = [
+            { name: "صبحانه کامل", price: "120,000", image: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", liked: false },
+            { name: "ناهار ایتالیایی", price: "250,000", image: "https://images.unsplash.com/photo-1605522867157-380f6e1eeda8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", liked: false },
+            { name: "شام دریایی", price: "380,000", image: "https://images.unsplash.com/photo-1559715745-e1b33a271c8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", liked: false },
+            { name: "دسر ویژه", price: "95,000", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", liked: false },
+            { name: "کباب ترکی", price: "320,000", image: "https://images.unsplash.com/photo-1594041680534-e8c8cdebd659?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", liked: false },
+            { name: "پاستا مخصوص", price: "210,000", image: "https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", liked: false },
+            { name: "سالاد سزار", price: "150,000", image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", liked: false },
+            { name: "سوشی پلاتر", price: "420,000", image: "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", liked: false }
+        ];
+
+        // داده‌های نمونه برای اتاق‌ها
+        const roomItems = [
+            { name: "اتاق استاندارد", price: "1,200,000", image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", liked: false },
+            { name: "اتاق رویال", price: "2,500,000", image: "https://images.unsplash.com/photo-1582582621959-48d27397dc69?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", liked: false },
+            { name: "سوئیت لوکس", price: "3,800,000", image: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", liked: false },
+            { name: "سوئیت خانواده", price: "4,500,000", image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", liked: false },
+            { name: "اتاق دوبلکس", price: "3,200,000", image: "https://images.unsplash.com/photo-1560448204-603b3fc33ddc?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", liked: false },
+            { name: "اتاق ویو دریا", price: "2,800,000", image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", liked: false }
+        ];
+
+        // تابع برای ایجاد کاروسل آیتم‌ها
+        function createCarousel(items, containerId, type) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            
+            // فقط ۴ آیتم اول نمایش داده می‌شوند
+            const visibleItems = items.slice(0, 4);
+            
+            visibleItems.forEach((item, index) => {
+                const col = document.createElement('div');
+                col.className = 'col-md-3 col-sm-6';
+                
+                col.innerHTML = `
+                    <div class="card">
+                        <img src="${item.image}" class="card-img-top" alt="${item.name}">
+                        <div class="card-body">
+                            <h5 class="card-title">${item.name}</h5>
+                            <p class="price">${item.price} افغانی</p>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-booking btn-sm">${type === 'menu' ? 'افزودن به سبد' : 'رزرو'}</button>
+                                <button class="btn btn-outline-secondary btn-sm like-btn" data-index="${index}">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(col);
+            });
+            
+            // اضافه کردن رویداد برای دکمه‌های علاقه‌مندی
+            document.querySelectorAll('.like-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = this.getAttribute('data-index');
+                    const icon = this.querySelector('i');
+                    
+                    if (icon.classList.contains('far')) {
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                        items[index].liked = true;
+                    } else {
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                        items[index].liked = false;
+                    }
+                });
+            });
+        }
+
+        // تابع برای چرخش آیتم‌ها در کاروسل
+        function rotateCarousel(items, containerId, type) {
+            setInterval(() => {
+                // انتقال اولین آیتم به انتهای آرایه
+                const firstItem = items.shift();
+                items.push(firstItem);
+                
+                // ایجاد دوباره کاروسل با آیتم‌های جدید
+                createCarousel(items, containerId, type);
+            }, 5000); // تغییر هر ۵ ثانیه
+        }
+
+        // مقداردهی اولیه هنگام لود صفحه
+        document.addEventListener('DOMContentLoaded', function() {
+            createCarousel(menuItems, 'menuCarousel', 'menu');
+            createCarousel(roomItems, 'roomCarousel', 'room');
+            
+            // شروع چرخش برای منوها و اتاق‌ها
+            rotateCarousel(menuItems, 'menuCarousel', 'menu');
+            rotateCarousel(roomItems, 'roomCarousel', 'room');
+        });
+    </script>
+</body>
+</html>
